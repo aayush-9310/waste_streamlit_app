@@ -1,9 +1,9 @@
 # Waste Classification Streamlit App
 # All dependencies tested and verified compatible with models
-# Using stable TensorFlow version with wide compatibility
+# Using stable TensorFlow version with wide OS compatibility
 
-tensorflow==2.13.0
-streamlit==1.28.0
+tensorflow==2.13.1
+streamlit==1.28.1
 numpy==1.24.3
 Pillow==10.0.0
 h5py==3.10.0
