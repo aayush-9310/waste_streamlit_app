@@ -1,0 +1,9 @@
+.env
+venv/
+test_compatibility.py
+COMPATIBILITY_REPORT.md
+__pycache__/
+*.pyc
+.DS_Store
+waste_classifier_final.h5
+waste_management_model.h5

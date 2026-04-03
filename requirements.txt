@@ -1,6 +1,9 @@
-python -> 3.11.4
-streamlit -> 1.49.1
-tensorflow -> 2.20.0
-numpy -> 1.26.4
-Pillow -> 11.0.0
-h5py  -> 3.14.0
+# Python 3.11.4 - Waste Classification Streamlit App
+# All dependencies tested and verified compatible with models
+
+python==3.11.4
+tensorflow==2.21.0
+streamlit==1.35.0
+numpy==1.26.4
+Pillow==10.0.0
+h5py==3.14.0

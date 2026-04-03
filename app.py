@@ -7,14 +7,13 @@ from PIL import Image
 # Load the trained model
 @st.cache_resource
 def load_model():
-    model = tf.keras.models.load_model("waste_management_model.h5", compile=False)
+    model = tf.keras.models.load_model("waste_classifier_final.keras", compile = False)
     return model
 
 model = load_model()
 
-# Class names
-CLASS_NAMES = ["cardboard", "glass", "metal", "paper", "plastic", "trash"]
-
+# Class names (10 classes)
+CLASS_NAMES = ['battery', 'organics', 'cardboard', 'clothes','glass', 'metal', 'paper', 'plastic', 'shoes', 'trash']
 
 AWARENESS = {
     "cardboard":{
@@ -235,6 +234,141 @@ AWARENESS = {
             "\t• Convert worn jeans into tote bags or coasters\n\n"
             "\t• Donate functional items to charity or community groups"
         )
+    },
+    "organics":{
+        "type":"🌱 Compostable & Biodegradable Organic Waste",
+        "info": (
+            "**Organic waste** (food scraps, yard waste, natural fibers) is biodegradable and can be composted into nutrient-rich soil. "
+            "Composting diverts waste from landfills and reduces methane emissions by up to 50%. When properly managed, organic waste becomes a valuable resource for gardens and agriculture. "
+            "Food waste alone represents 8-10% of global greenhouse gas emissions when decomposed in landfills. "
+        ),
+        "Environmental Impact":(
+            "Composting 1 ton of organic waste prevents 1.5 tons of CO2-equivalent emissions from entering the atmosphere. "
+            "Industrial composting facilities process millions of tons annually, returning nutrients to soil ecosystems. "
+            "However, improper disposal in landfills creates anaerobic conditions that produce methane, a potent greenhouse gas. "
+        ),
+        "local_action": (
+            "**🛠️ DIY Composting Methods:**\n\n"
+            "**Home Composting:**\n"
+            "\t• Use a bin or pile in your garden\n"
+            "\t• Layer green waste (food/grass) with brown waste (leaves/paper)\n"
+            "\t• Keep moist and turn regularly\n"
+            "\t• Ready in 2-3 months\n\n"
+            "**Vermicomposting (Worm Composting):**\n"
+            "\t• Use red wiggler worms in a bin\n"
+            "\t• Add food scraps weekly\n"
+            "\t• No smell or outdoor space needed\n"
+            "\t• Harvest nutrient-rich compost every 3-4 months"
+        )
+    },
+    "wood":{
+        "type":"🌳 Recyclable & Reusable Wood Waste",
+        "info": (
+            "**Wood waste** from construction, furniture, and packaging can be recycled, repurposed, or composted. "
+            "Recycled wood reduces demand for virgin timber, preserving forests and their carbon-sequesting capacity. "
+            "Untreated wood can be composted or used as mulch, while pressure-treated or painted wood requires special handling to prevent toxic chemical release. "
+        ),
+        "Environmental Impact":(
+            "Recycling wood waste prevents deforestation and saves millions of trees annually. "
+            "Wood processing and disposal in landfills releases methane as the material decomposes. "
+            "Reusing wood through furniture restoration or construction reduces the need for new lumber, lowering carbon emissions and forest destruction. "
+        ),
+        "local_action": (
+            "**🛠️ Wood Waste Management:**\n\n"
+            "**Reuse & Upcycling:**\n"
+            "\t• Convert pallets into furniture, planters, or garden beds\n"
+            "\t• Use scrap wood for DIY home projects\n"
+            "\t• Donate wood to community workshops\n\n"
+            "**Recycling & Composting:**\n"
+            "\t• Chop untreated wood into mulch for gardens\n"
+            "\t• Take pressure-treated wood to hazardous waste facilities\n"
+            "\t• Compost untreated sawdust and wood chips"
+        )
+    },
+    "shoes":{
+        "type":"👟 Reusable & Recyclable Shoe Waste",
+        "info": (
+            "**Shoe waste** (footwear, textile materials) can be reused, donated, or recycled. "
+            "The fast fashion industry generates 92 million tons of textile waste annually from clothing and footwear. Most shoes end up in landfills where they take 200+ years to decompose. "
+            "Recycling and reusing shoes reduces water pollution from dye production and saves energy compared to manufacturing new footwear. "
+        ),
+        "Environmental Impact":(
+            "Producing one pair of shoes requires significant water and generates pesticide pollution from material production. "
+            "Shoe manufacturing and textile dyeing are among the largest polluters of water globally, responsible for 20% of industrial water pollution. "
+            "Extending shoe life through maintenance and repair can reduce environmental impact by 20-30% compared to new production. "
+        ),
+        "local_action": (
+            "**🛠️ Shoe Waste Solutions:**\n\n"
+            "**Repair & Reuse:**\n"
+            "\t• Repair soles and heels at professional cobblers\n"
+            "\t• Fix small tears and loose seams\n"
+            "\t• Donate wearable shoes to charities\n\n"
+            "**Creative Upcycling:**\n"
+            "\t• Use old shoes as planters (fill with soil)\n"
+            "\t• Create shoe organizers for storage\n"
+            "\t• Transform into wall decor or garden decorations\n"
+            "\t• Make dog toys or pet beds from cushioning\n\n"
+            "**Recycling:**\n"
+            "\t• Take worn shoes to shoe recycling centers\n"
+            "\t• Donate to secondhand stores\n"
+            "\t• Use with textile recycling programs"
+        )
+    },
+    "clothes":{
+        "type":"👕 Reusable & Recyclable Clothing Waste",
+        "info": (
+            "**Clothing waste** (garments, fabrics, textiles) can be reused, donated, or recycled. "
+            "The fast fashion industry generates 92 million tons of textile waste annually. Most clothes end up in landfills where they take 200+ years to decompose. "
+            "Recycling and reusing clothes reduces water pollution from dye production and saves energy compared to manufacturing new fabrics. "
+        ),
+        "Environmental Impact":(
+            "Producing one cotton t-shirt requires 2,700 liters of water and generates significant pesticide pollution. "
+            "Textile dyeing is the second-largest polluter of water globally, responsible for 20% of industrial water pollution. "
+            "Extending garment life through repair and reuse can reduce environmental impact by 20-30% compared to new production. "
+        ),
+        "local_action": (
+            "**🛠️ Clothing Waste Solutions:**\n\n"
+            "**Repair & Reuse:**\n"
+            "\t• Mend holes, tears, and loose seams\n"
+            "\t• Alter clothing to fit better\n"
+            "\t• Donate wearable items to charities\n\n"
+            "**Creative Upcycling:**\n"
+            "\t• Cut old shirts into cleaning rags\n"
+            "\t• Weave textiles into rugs or wall hangings\n"
+            "\t• Transform jeans into bags or shorts\n"
+            "\t• Make tote bags from old fabrics\n\n"
+            "**Recycling:**\n"
+            "\t• Take worn clothing to textile recycling centers\n"
+            "\t• Donate to secondhand clothing stores"
+        )
+    },
+    "battery":{
+        "type":"⚠️ Hazardous Waste - Special Handling Required",
+        "info": (
+            "**Hazardous waste** (batteries, electronics, chemicals, paint, light bulbs) contains toxic materials that contaminate soil and groundwater when improperly disposed. "
+            "Hazardous waste requires specialized collection and processing to prevent environmental and health damage. "
+            "Many hazardous materials can be safely recovered and recycled through certified facilities. "
+        ),
+        "Environmental Impact":(
+            "Improper disposal of hazardous waste causes soil and water contamination affecting millions. "
+            "Electronic waste contains rare earth elements and toxic metals (lead, mercury, cadmium) that poison ecosystems for decades. "
+            "Recycling hazardous materials recovers valuable resources while preventing toxic pollution. "
+        ),
+        "local_action": (
+            "**🛠️ Hazardous Waste Disposal:**\n\n"
+            "**DO NOT throw in regular trash:**\n"
+            "\t• Batteries (alkaline, rechargeable, car batteries)\n"
+            "\t• Electronics (phones, computers, TVs, appliances)\n"
+            "\t• Paint, solvents, pesticides, motor oil\n"
+            "\t• Light bulbs (fluorescent, LED, halogen)\n"
+            "\t• Medical waste (needles, medications)\n\n"
+            "**Safe Disposal Methods:**\n"
+            "\t• Take to hazardous waste collection events\n"
+            "\t• Visit local waste management centers\n"
+            "\t• Use manufacturer take-back programs (electronics)\n"
+            "\t• Contact professional disposal services\n"
+            "\t• Never burn or bury hazardous materials"
+        )
     }
 
 }
@@ -248,11 +382,11 @@ uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png
 
 if uploaded_file is not None:
     # Display image
-    image = Image.open(uploaded_file)
-    st.image(image, caption="Uploaded Image", use_container_width=True)
+    image = Image.open(uploaded_file).convert("RGB")
+    st.image(image, caption="Uploaded Image", use_column_width=True)
 
     # Preprocess image
-    img = image.resize((128, 128))
+    img = image.resize((224, 224))
     img_array = np.array(img) / 255.0
     img_array = np.expand_dims(img_array, axis=0)
 
